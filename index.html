@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiến thức Git Cơ Bản</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; background: #f9f9f9; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: left; }
+        th { background: #f1f1f1; }
+        pre { background: #eee; padding: 10px; border-radius: 5px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; }
+        .image-container { text-align: center; margin: 30px 0; }
+        img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        caption { font-style: italic; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Kiến thức về Git cơ bản</h1>
+
+<h2>Git là gì?</h2>
+<p>Git là một hệ thống quản lý phiên bản phân tán (Distributed Version Control System - DVCS) mã nguồn mở, được sử dụng rộng rãi để theo dõi thay đổi trong mã nguồn phần mềm. Nó giúp lập trình viên lưu lịch sử thay đổi, quay lại phiên bản cũ, làm việc nhóm hiệu quả mà không ảnh hưởng đến mã chính.</p>
+
+<h2>Cài đặt Git</h2>
+<ul>
+    <li><strong>Trên Windows</strong>: Tải từ trang chính thức <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a>. Chạy file cài đặt, giữ các tùy chọn mặc định và hoàn tất. Sau cài đặt, bạn có Git Bash để sử dụng lệnh.</li>
+    <li><strong>Trên macOS</strong>: Sử dụng Homebrew (<code>brew install git</code>) hoặc tải từ trang chính thức.</li>
+    <li><strong>Trên Linux (Ubuntu/Debian)</strong>: Chạy lệnh <code>sudo apt update && sudo apt install git</code>.</li>
+    <li>Kiểm tra cài đặt: Mở terminal/cmd và gõ <code>git --version</code>.</li>
+</ul>
+
+<h2>Cấu hình cơ bản</h2>
+<p>Sau khi cài đặt, thiết lập thông tin cá nhân (chỉ cần làm một lần):</p>
+<pre><code>git config --global user.name "Tên của bạn"
+git config --global user.email "email@domain.com"</code></pre>
+
+<h2>Các lệnh Git cơ bản</h2>
+<p>Dưới đây là các lệnh phổ biến nhất cho người mới bắt đầu. Workflow cơ bản: Thay đổi file → <code>add</code> → <code>commit</code> → <code>push</code> (nếu có remote).</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Lệnh</th>
+            <th>Mô tả</th>
+            <th>Ví dụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>git init</code></td>
+            <td>Khởi tạo repository mới trong thư mục hiện tại.</td>
+            <td><code>git init</code></td>
+        </tr>
+        <tr>
+            <td><code>git clone &lt;url&gt;</code></td>
+            <td>Sao chép repository từ remote (ví dụ GitHub).</td>
+            <td><code>git clone https://github.com/user/repo.git</code></td>
+        </tr>
+        <tr>
+            <td><code>git status</code></td>
+            <td>Kiểm tra trạng thái thay đổi (file nào modified, staged...).</td>
+            <td><code>git status</code></td>
+        </tr>
+        <tr>
+            <td><code>git add &lt;file&gt;</code></td>
+            <td>Thêm file thay đổi vào staging area (chuẩn bị commit).</td>
+            <td><code>git add index.html</code><br>Hoặc <code>git add .</code> (thêm tất cả)</td>
+        </tr>
+        <tr>
+            <td><code>git commit -m "message"</code></td>
+            <td>Lưu thay đổi vào lịch sử (commit) với mô tả.</td>
+            <td><code>git commit -m "Sửa lỗi login"</code></td>
+        </tr>
+        <tr>
+            <td><code>git log</code></td>
+            <td>Xem lịch sử commit.</td>
+            <td><code>git log --oneline</code> (ngắn gọn)</td>
+        </tr>
+        <tr>
+            <td><code>git branch</code></td>
+            <td>Liệt kê các branch. Tạo branch mới: <code>git branch &lt;tên&gt;</code>.</td>
+            <td><code>git branch feature/new</code></td>
+        </tr>
+        <tr>
+            <td><code>git checkout &lt;branch&gt;</code></td>
+            <td>Chuyển sang branch khác.<br>Tạo và chuyển: <code>git checkout -b &lt;tên&gt;</code>.</td>
+            <td><code>git checkout main</code><br><code>git checkout -b develop</code></td>
+        </tr>
+        <tr>
+            <td><code>git merge &lt;branch&gt;</code></td>
+            <td>Hợp nhất branch vào branch hiện tại.</td>
+            <td><code>git merge feature/new</code></td>
+        </tr>
+        <tr>
+            <td><code>git pull</code></td>
+            <td>Lấy thay đổi mới từ remote và merge vào local.</td>
+            <td><code>git pull origin main</code></td>
+        </tr>
+        <tr>
+            <td><code>git push</code></td>
+            <td>Đẩy commit lên remote.</td>
+            <td><code>git push origin main</code></td>
+        </tr>
+        <tr>
+            <td><code>git remote add origin &lt;url&gt;</code></td>
+            <td>Kết nối repository local với remote (GitHub/GitLab...).</td>
+            <td><code>git remote add origin https://github.com/user/repo.git</code></td>
+        </tr>
+        <tr>
+            <td><code>git diff</code></td>
+            <td>Xem sự khác biệt thay đổi chưa staged.</td>
+            <td><code>git diff</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Workflow cơ bản cho dự án mới</h2>
+<ol>
+    <li>Tạo repository trên GitHub/GitLab.</li>
+    <li>Clone về local: <code>git clone &lt;url&gt;</code>.</li>
+    <li>Tạo branch mới nếu cần: <code>git checkout -b ten-branch</code>.</li>
+    <li>Thay đổi file → <code>git add .</code> → <code>git commit -m "Mô tả"</code>.</li>
+    <li>Đẩy lên: <code>git push origin ten-branch</code>.</li>
+    <li>Tạo Pull Request trên web để merge.</li>
+</ol>
+
+<h2>Hình minh họa</h2>
+
+<div class="image-container">
+    <img src="https://wac-cdn.atlassian.com/dam/jcr:cc0b526e-adb7-4d45-874e-9bcea9898b4a/04%20Hotfix%20branches.svg?cdnVersion=3128" alt="Gitflow Workflow Diagram">
+    <figcaption>Gitflow Workflow (Nguồn: Atlassian)</figcaption>
+</div>
+
+<div class="image-container">
+    <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvpxeexqyfvf4hw3zxtbn.png" alt="Git Workflow Fundamentals">
+    <figcaption>Quy trình Git cơ bản (Nguồn: DEV Community)</figcaption>
+</div>
+
+<div class="image-container">
+    <img src="https://i.redd.it/8341g68g1v7y.png" alt="Git Commands Cheat Sheet">
+    <figcaption>Git Cheat Sheet (Bảng tóm tắt lệnh Git)</figcaption>
+</div>
+
+<div class="image-container">
+    <img src="https://wac-cdn.atlassian.com/dam/jcr:c6db91c1-1343-4d45-8c93-bdba910b9506/02%20Branch-1%20kopiera.png?cdnVersion=3127" alt="Git Branch Merge Illustration">
+    <figcaption>Minh họa merge branch trong Git (Nguồn: Atlassian)</figcaption>
+</div>
+
+<h2>Lưu ý thường gặp</h2>
+<ul>
+    <li>Tránh commit file nhạy cảm (password, key): Tạo file <code>.gitignore</code> để bỏ qua (ví dụ: <code>.env</code>, <code>node_modules/</code>).</li>
+    <li>Xung đột (conflict): Khi merge/pull, Git sẽ báo nếu có xung đột → Chỉnh sửa file thủ công rồi commit lại.</li>
+    <li>Undo thay đổi: <code>git restore &lt;file&gt;</code> (bỏ thay đổi chưa add), hoặc <code>git reset --hard</code> (cẩn thận, xóa hết thay đổi).</li>
+</ul>
+
+<p>Nếu bạn mới bắt đầu, hãy thực hành trên một thư mục test. Khuyến nghị đọc thêm hướng dẫn đơn giản tại: <a href="https://rogerdudler.github.io/git-guide/index.vi.html">https://rogerdudler.github.io/git-guide/index.vi.html</a> (bản tiếng Việt).</p>
+
+<footer>
+    <p>Trang này lưu toàn bộ nội dung hướng dẫn Git cơ bản. Bạn có thể lưu file này về máy và mở bằng trình duyệt để xem offline.</p>
+</footer>
+
+</body>
+</html>
